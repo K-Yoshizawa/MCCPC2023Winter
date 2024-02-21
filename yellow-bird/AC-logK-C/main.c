@@ -1,14 +1,18 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <stdio.h>
+
+#define NMAX 500050
+
+int come[NMAX];
 
 int main(){
-    int N, M; cin >> N >> M;
+    int N, M;
+    scanf("%d %d", &N, &M);
     
-    vector<int> come(N + 1, -1);
+    for(int i = 1; i <= N; ++i) come[i] = -1;
     int last_photo = -1;
-
     for(int i = 0; i < M; ++i){
-        int t, x; cin >> t >> x;
+        int t, x;
+        scanf("%d %d", &t, &x);
         switch(t){
             case 1 :
                 if(come[x] == -1) come[x] = i;
@@ -22,11 +26,15 @@ int main(){
         }
     }
 
-    vector<int> ans;
+    int ans = 0;
     for(int i = 1; i <= N; ++i){
-        if(come[i] != -1) ans.push_back(i);
+        if(come[i] != -1) ++ans;
     }
-    cout << ans.size() << endl;
-    for(auto a : ans) cout << a << " ";
-    cout << endl;
+    printf("%d\n", ans);
+    for(int i = 1; i <= N; ++i){
+        if(come[i] != -1){
+            printf("%d ", i);
+        }
+    }
+    printf("\n");
 }
