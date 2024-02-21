@@ -3,6 +3,7 @@ name: Run test
 on:
   push:
     branches:
+    - 'master'
     - 'main'
 
     paths-ignore:
