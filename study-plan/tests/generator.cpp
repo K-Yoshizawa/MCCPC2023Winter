@@ -34,14 +34,17 @@ int main(int argc, char* argv[])
     registerGen(argc, argv, 1);
     // sample
     {
-        gen("01_sample_01.in", 5, 10, 20, 30,
+        gen("00_sample_01.in", 5, 10, 20, 30,
             { 10, 0, 0, 0, 0 },
             { 0, 10, 10, 0, 0 },
             { 0, 0, 0, 10, 20 });
-        gen("01_sample_02.in", 5, 100, 100, 100,
+        gen("00_sample_02.in", 5, 100, 100, 100,
             { 10, 0, 0, 0, 0 },
             { 0, 10, 10, 0, 0 },
             { 0, 0, 0, 10, 20 });
+    }
+    // subtask
+    {
     }
     return 0;
 }
