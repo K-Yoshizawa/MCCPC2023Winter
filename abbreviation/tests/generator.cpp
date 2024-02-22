@@ -30,7 +30,7 @@ int main(int argc, char* argv[]){
    }
 
    for (int ts = 1; ts < std::size(lst) / 2; ts++) {
-      std::ofstream of(format("01_all_%02d", ts).c_str());
+      std::ofstream of(format("01_all_%02d.in", ts).c_str());
       of << lst[2*ts] << std::endl;
       of.close();
    }
