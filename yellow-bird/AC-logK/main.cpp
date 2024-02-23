@@ -24,7 +24,7 @@ int main(){
 
     vector<int> ans;
     for(int i = 1; i <= N; ++i){
-        if(come[i] != -1) ans.push_back(i);
+        if(come[i] != -1 and come[i] < last_photo) ans.push_back(i);
     }
     cout << ans.size() << endl;
     for(auto a : ans) cout << a << " ";

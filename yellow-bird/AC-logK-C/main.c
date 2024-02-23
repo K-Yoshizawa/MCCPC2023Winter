@@ -28,11 +28,11 @@ int main(){
 
     int ans = 0;
     for(int i = 1; i <= N; ++i){
-        if(come[i] != -1) ++ans;
+        if(come[i] != -1 && come[i] < last_photo) ++ans;
     }
     printf("%d\n", ans);
     for(int i = 1; i <= N; ++i){
-        if(come[i] != -1){
+        if(come[i] != -1 && come[i] < last_photo){
             printf("%d ", i);
         }
     }
