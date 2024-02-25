@@ -15,9 +15,7 @@ int main(){
             }
         }
     }
-    cout << accumulate(ans.begin(), ans.end(), 0) << endl;
     for(int i = 1; i <= N; ++i){
-        if(ans[i]) cout << i << " ";
+        if(ans[i]) cout << i << endl;
     }
-    cout << endl;
 }

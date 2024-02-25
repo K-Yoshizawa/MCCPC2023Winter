@@ -19,9 +19,7 @@ int main(){
             }
         }
     }
-    cout << ans.size() << endl;
     for(auto x : ans){
-        cout << x << " ";
+        cout << x << endl;
     }
-    cout << endl;
 }
