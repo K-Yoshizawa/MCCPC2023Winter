@@ -19,3 +19,6 @@
 
 本当に何も分からない人のためのRime
 https://a8pfactory.hatenablog.com/entry/2022/04/07/200000_1
+
+作問リスト
+https://docs.google.com/spreadsheets/d/1lDMJSXTuDgcMw_EgyQ9wBKhXEApOan52pWuwD1m8KIk/edit#gid=0
