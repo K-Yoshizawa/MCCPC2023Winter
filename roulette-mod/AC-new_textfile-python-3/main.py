@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-import math
+
+# 2 つの非負整数 a, b の最大公約数を返す関数
+def gcd(a, b):
+    if b == 0 : return a
+    return gcd(b, a%b)
 
 def solve(N, M):
     
@@ -8,7 +12,7 @@ def solve(N, M):
     denom = N               #分母
 
     # 既約分数で表すために、分子と分母を最大公約数で割る
-    g = math.gcd(numer, denom)
+    g = gcd(numer, denom)
     numer //= g
     denom //= g
 
