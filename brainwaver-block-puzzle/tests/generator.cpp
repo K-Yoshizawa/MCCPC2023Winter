@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
     
     // サンプル
     vector<array<int,4>> sample_inputs;
-    sample_inputs.push_back({1,1,2,2});
+    sample_inputs.push_back({2,2,1,0});
     sample_inputs.push_back({0,2,0,0});
     for(int t = 0; t < sample_inputs.size(); t++){
         ofstream of(format("00_sample_%02d.in", t + 1).c_str());
