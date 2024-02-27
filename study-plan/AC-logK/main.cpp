@@ -11,19 +11,19 @@ int main(){
     vector dp(N + 1, vector(6010, vector(6010, -1)));
     dp[0][0][0] = 0;
     for(int i = 0; i < N; ++i){
-        for(int j = 0; j < 6010; ++j){
-            for(int k = 0; k < 6010; ++k){
+        for(int j = 0; j <= 6000; ++j){
+            for(int k = 0; k <= 6000; ++k){
                 if(dp[i][j][k] == -1) continue;
-                if(j + A[i] < 6010) dp[i + 1][j + A[i]][k] = max(dp[i + 1][j + A[i]][k], dp[i][j][k]);
-                if(k + B[i] < 6010) dp[i + 1][j][k + B[i]] = max(dp[i + 1][j][k + B[i]], dp[i][j][k]);
+                if(j + A[i] <= 6000) dp[i + 1][j + A[i]][k] = max(dp[i + 1][j + A[i]][k], dp[i][j][k]);
+                if(k + B[i] <= 6000) dp[i + 1][j][k + B[i]] = max(dp[i + 1][j][k + B[i]], dp[i][j][k]);
                 dp[i + 1][j][k] = max(dp[i + 1][j][k], dp[i][j][k] + C[i]);
             }
         }
     }
     
     int a = -1, b = -1;
-    for(int j = X; j < 6010; ++j){
-        for(int k = Y; k < 6010; ++k){
+    for(int j = X; j <= 6000; ++j){
+        for(int k = Y; k <= 6000; ++k){
             if(dp[N][j][k] >= Z){
                 a = j, b = k;
             }
