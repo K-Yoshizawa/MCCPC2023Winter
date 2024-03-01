@@ -52,8 +52,8 @@ int main(int argc, char* argv[]) {
     
     unionfind uf(N);
     for(int i = 0; i < N-1; i++){
-        int A = inf.readInt(1, N, "A_i"); inf.readSpace();
-        int B = inf.readInt(1, N, "B_i"); inf.readEoln();
+        int A = inf.readInt(1, N, format("A_%d", i + 1).c_str()); inf.readSpace();
+        int B = inf.readInt(1, N, format("B_%d", i + 1).c_str()); inf.readEoln();
         A--; B--;
         ensure(A < B && !uf.same(A, B));
         uf.unite(A, B);
@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
     vector<bool> used(N);
     used[0] = true;
     for(int i = 0; i < N-1; i++){
-        int x = inf.readInt(2, N, "x_i");
+        int x = inf.readInt(2, N, format("x_%d", i + 1).c_str());
         x--;
         
         ensure(!used[x]);
