@@ -13,8 +13,7 @@ void output(vector<array<int,2>> &inputs, string filename){
     of << inputs.size() << '\n';
     for(int i = 0; i < inputs.size(); i++){
         auto [N, M] = inputs[i];
-        of << N << ' ' << M;
-        if(i+1 != inputs.size()) of << '\n';
+        of << N << ' ' << M << '\n';
     }
 
     of.close();
