@@ -15,7 +15,9 @@ int main(void) {
          }
          inserted = true;
       }
-      printf("%c", s[i]);
+      if (s[i] != '\0') {
+         printf("%c", s[i]);
+      }
    }
    printf("\n");
 
