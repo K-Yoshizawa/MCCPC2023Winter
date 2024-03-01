@@ -219,25 +219,25 @@ int main(int argc, char* argv[]){
 
     // sample
     {
-        ofstream of(format("00_sample_01.in").c_str());
+        ofstream of(::format("00_sample_01.in").c_str());
         of << "3 8" << endl;
         of << "RRDDRRDD" << endl;
         of.close();
     }
     {
-        ofstream of(format("00_sample_02.in").c_str());
+        ofstream of(::format("00_sample_02.in").c_str());
         of << "3 6" << endl;
         of << "RRRRUU" << endl;
         of.close();
     }
     {
-        ofstream of(format("00_sample_03.in").c_str());
+        ofstream of(::format("00_sample_03.in").c_str());
         of << "3 16" << endl;
         of << "DDDDRRUUUURRDDDD" << endl;
         of.close();
     }
     {
-        ofstream of(format("00_sample_04.in").c_str());
+        ofstream of(::format("00_sample_04.in").c_str());
         of << "3 14" << endl;
         of << "RRDDLLDDRRRRUU" << endl;
         of.close();
@@ -247,20 +247,20 @@ int main(int argc, char* argv[]){
     {
         // N = 3
         {
-            ofstream of(format("11_n3_01.in").c_str());
+            ofstream of(::format("11_n3_01.in").c_str());
             of << "3 16" << endl;
             of << "RRRRDDLLLLDDRRRR" << endl;
             of.close();
         }
         {
-            ofstream of(format("11_n3_02.in").c_str());
+            ofstream of(::format("11_n3_02.in").c_str());
             of << "3 16" << endl;
             of << "DDDDRRUUUURRDDDD" << endl;
             of.close();
         }
         // N = 5
         for(int i = 0; i < 10; ++i){
-            subtask_gen(format("12_n5_%02d.in", i + 1).c_str(), 5);
+            subtask_gen(::format("12_n5_%02d.in", i + 1).c_str(), 5);
         }
     }
 
@@ -268,40 +268,40 @@ int main(int argc, char* argv[]){
     {
         // Yes N = 2
         {
-            ofstream of(format("21_min_01.in").c_str());
+            ofstream of(::format("21_min_01.in").c_str());
             of << "2 4" << endl;
             of << "RRDD" << endl;
             of.close();
         }
         {
-            ofstream of(format("21_min_02.in").c_str());
+            ofstream of(::format("21_min_02.in").c_str());
             of << "2 4" << endl;
             of << "DDRR" << endl;
             of.close();
         }
         // Yes small
         for(int i = 0; i < 10; ++i){
-            main_gen(format("22_small_%02d.in", i + 1).c_str(), rnd.next(MIN_SMALL_N, MAX_SMALL_N));
+            main_gen(::format("22_small_%02d.in", i + 1).c_str(), rnd.next(MIN_SMALL_N, MAX_SMALL_N));
         }
         // Yes large
         for(int i = 0; i < 10; ++i){
-            main_gen(format("23_large_%02d.in", i + 1).c_str(), rnd.next(MIN_LARGE_N, MAX_LARGE_N));
+            main_gen(::format("23_large_%02d.in", i + 1).c_str(), rnd.next(MIN_LARGE_N, MAX_LARGE_N));
         }
         // Yes max
         for(int i = 0; i < 10; ++i){
-            main_gen(format("24_max_%02d.in", i + 1).c_str(), rnd.next(MAX_N, MAX_N));
+            main_gen(::format("24_max_%02d.in", i + 1).c_str(), rnd.next(MAX_N, MAX_N));
         }
         // No 1
         for(int i = 0; i < 5; ++i){
-            main_gen(format("25_ng_%02d.in", i + 1).c_str(), rnd.next(MIN_N, MAX_N), 1);
+            main_gen(::format("25_ng_%02d.in", i + 1).c_str(), rnd.next(MIN_N, MAX_N), 1);
         }
         // No 2
         for(int i = 5; i < 10; ++i){
-            main_gen(format("25_ng_%02d.in", i + 1).c_str(), rnd.next(MIN_N, MAX_N), 2);
+            main_gen(::format("25_ng_%02d.in", i + 1).c_str(), rnd.next(MIN_N, MAX_N), 2);
         }
         // No 3
         for(int i = 10; i < 15; ++i){
-            main_gen(format("25_ng_%02d.in", i + 1).c_str(), rnd.next(MIN_N, MAX_N), 3);
+            main_gen(::format("25_ng_%02d.in", i + 1).c_str(), rnd.next(MIN_N, MAX_N), 3);
         }
     }
 }
