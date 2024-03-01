@@ -9,7 +9,7 @@ af readAns(InStream &is, int N){
     is.readEoln();
     int n = 2 * N + 1;
     vector<string> ret;
-    if(yn == "Yes") ret = is.readTokens(n, format("[#.]{%d, %d}", n, n));
+    if(yn == "Yes") ret = is.readTokens(n, ::format("[#.]{%d, %d}", n, n));
     return af(yn, ret);
 }
 
@@ -115,7 +115,7 @@ int main(int argc, char* argv[]){
     inf.readSpace();
     int M = inf.readInt();
     inf.readEoln();
-    string S = inf.readToken(format("[LRUD]{%d, %d}", M, M));
+    string S = inf.readToken(::format("[LRUD]{%d, %d}", M, M));
     inf.readEoln();
     inf.readEof();
 
