@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 
    // 完全ランダム
    for (int ts{1}; ts <= 10; ts++) {
-      std::ofstream of(format("01_random_%2d.in", ts).c_str());
+      std::ofstream of(format("01_random_%02d.in", ts).c_str());
       int n{1}, d{};
       while (n > d) {
          n = rnd.next(N_MIN, N_MAX);
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 
    // 0 と 1 のみ
    for (int ts{1}; ts <= 3; ts++) {
-      std::ofstream of(format("02_only01_%2d.in", ts).c_str());
+      std::ofstream of(format("02_only01_%02d.in", ts).c_str());
       int n{1}, d{};
       while (n > d) {
          n = rnd.next(N_MIN, N_MAX);
@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
 
    // かならず 0 が 1 つ以上
    for (int ts{1}; ts <= 5; ts++) {
-      std::ofstream of(format("03_s0s_%2d.in", ts).c_str());
+      std::ofstream of(format("03_s0s_%02d.in", ts).c_str());
       int n{1}, d{};
       while (n > d) {
          n = rnd.next(4, N_MAX);
