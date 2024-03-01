@@ -42,29 +42,33 @@ int main(){
     rep(v,0,n) for(auto nv : G_undirected[v]) if(dist[nv] > dist[v]) G[v].emplace_back(nv);
 
     vector<bool> visited(n);
-    auto dfs = [&](ll v, auto &dfs) -> ll {
-        ll res = 1;
-        for(auto nv : G[v]){
-            if(!visited[nv]){
-                visited[nv] = true;
-                res += dfs(nv, dfs);
-            }
-        }
-
-        return res;
-    };
-
     ll ans = 0;
     rep(i,0,n-1){
         ll x; cin >> x;
         x--;
         if(!visited[x]){
             visited[x] = true;
-            ll res = dfs(x, dfs);
-            ans += res*res;
+            
+            ll erasedcnt = 1;
+            que.emplace(x);
+            while(!que.empty()){
+                ll v = que.front();
+                que.pop();
+
+                for(auto nv : G[v]){
+                    if(!visited[nv]){
+                        visited[nv] = true;
+                        erasedcnt++;
+                        que.emplace(nv);
+                    }
+                }
+            }
+
+            ans += erasedcnt*erasedcnt;
         }
     }
 
     cout << ans << endl;
+
 }
 
