@@ -67,9 +67,9 @@ void make_random_case(string case_name, int N){
     for(auto [A, B] : make_tree(N)){
         of << A << " " << B << endl;
     }
-    auto x = rnd.perm(N);
-    for(int i = 0; i < N; ++i){
-        of << x[i] + 1 << (i + 1 == N ? '\n' : ' ');
+    auto x = rnd.perm(N - 1);
+    for(int i = 0; i < N - 1; ++i){
+        of << x[i] + 2 << (i + 1 == N - 1 ? '\n' : ' ');
     }
     of.close();
     return;
@@ -97,8 +97,8 @@ void make_vicious_case(string case_name, int N){
         }
     }
     reverse(x.begin(), x.end());
-    for(int i = 0; i < N; ++i){
-        of << x[i] << (i + 1 == N ? '\n' : ' ');
+    for(int i = 0; i < N - 1; ++i){
+        of << x[i] << (i + 1 == N - 1 ? '\n' : ' ');
     }
     of.close();
     return;
@@ -110,9 +110,9 @@ void make_random_case_path(string case_name, int N){
     for(int i = 1; i < N; ++i){
         of << i << " " << i + 1 << endl;
     }
-    auto x = rnd.perm(N);
-    for(int i = 0; i < N; ++i){
-        of << x[i] + 1 << (i + 1 == N ? '\n' : ' ');
+    auto x = rnd.perm(N - 1);
+    for(int i = 0; i < N - 1; ++i){
+        of << x[i] + 2 << (i + 1 == N - 1 ? '\n' : ' ');
     }
     of.close();
     return;
