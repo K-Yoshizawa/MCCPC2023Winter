@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main(){
@@ -16,9 +17,15 @@ int main(){
     else if(gx == 2 && gy == 1) S = "RUR";
     else if(gx == 2 && gy == 2) S = "RUUR";
     
-    int N = S.size();
+    vector<pair<char,int>> ans;
+    for(int i = 0; i < S.size(); i++){
+        ans.emplace_back(S[i], 1);
+    }
 
-    cout << N << endl;
-    cout << S << endl;
-    
+    cout << ans.size() << endl;
+    for(int i = 0; i < ans.size(); i++){
+        auto [d, l] = ans[i];
+        cout << d << " " << l << endl;
+    }
+
 }

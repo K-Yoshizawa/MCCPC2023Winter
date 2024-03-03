@@ -1,20 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef long long int ll;
+
 const int L = 0;
 const int R = 1;
 const int U = 2;
 const int D = 3;
 
 int N = 0;
-char S[500001];
+char d[200001];
+int l[200001];
 
-// S に c を len 文字追加する
+// c を len 文字追加する
 void addc(int len, char c){
-    for(int i = 0; i < len; i++){
-        S[N] = c;
-        N++;
-    }
+    if(len <= 0) return;
+
+    d[N] = c;
+    l[N] = len;
+    N++;
 }
 
 int main(){
@@ -45,9 +49,7 @@ int main(){
     addc((gy-1)-sy, dir[U]);
     addc(gx-sx, dir[R]);
     addc(1, dir[U]);
-    S[N] = '\0';
-
+    
     printf("%d\n", N);
-    printf("%s\n", S);
-
+    for(int i = 0; i < N; i++) printf("%c %d\n", d[i], l[i]);
 }

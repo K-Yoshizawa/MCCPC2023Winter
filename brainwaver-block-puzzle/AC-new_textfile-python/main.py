@@ -15,13 +15,22 @@ if sy > gy :
     gy *= -1
     dir['U'], dir['D'] = 'D', 'U'
 
-S = ""
+ans = []
 while (gy-sy) % 4 != 2:
     sy -= 1
-    S += dir['R'] + dir['D'] + dir['L']
+    ans.append((dir['R'],1))
+    ans.append((dir['D'],1))
+    ans.append((dir['L'],1))
 
-S += dir['U']*((gy-1)-sy) + dir['R']*(gx-sx) + dir['U']
-N = len(S)
+if (gy-1)-sy > 0:
+    ans.append((dir['U'], (gy-1)-sy))
 
-print(N)
-print(S)
+if (gx-sx) > 0:
+    ans.append((dir['R'], (gx-sx)))
+
+
+ans.append((dir['U'],1))
+
+print(len(ans))
+for D, L in ans:
+    print(D, L)

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <map>
 using namespace std;
 
@@ -21,16 +22,22 @@ int main(){
         swap(dir['U'], dir['D']);
     }
     
-    int N;
-    string S = "";
+    vector<pair<char, int>> ans;
     while((gy-sy) % 4 != 2){
         sy--;
-        S += string(1, dir['R']) + string(1, dir['D']) + string(1, dir['L']);
+        ans.emplace_back(dir['R'], 1);
+        ans.emplace_back(dir['D'], 1);
+        ans.emplace_back(dir['L'], 1);
     }
     
-    S += string((gy-1) - sy, dir['U']) + string(gx - sx, dir['R']) + dir['U'];
-    N = S.size();
+    if((gy-1)-sy > 0) ans.emplace_back(dir['U'], (gy-1) - sy);
+    if(gx-sx > 0) ans.emplace_back(dir['R'], gx - sx);
+    ans.emplace_back(dir['U'], 1);
 
-    cout << N << endl;
-    cout << S << endl;
+    cout << ans.size() << endl;
+    for(int i = 0; i < ans.size(); i++){
+        auto [D, L] = ans[i];
+        cout << D << " " << L << endl;
+    }
+    
 }

@@ -11,8 +11,8 @@ cxx_generator(src='generator.cpp', flags=['-std=c++2a'], dependency=['testlib.h'
 ## Input validators.
 #c_validator(src='validator.c')
 cxx_validator(src='validator_new-textfile.cpp', flags=['-std=c++2a'], dependency=['testlib.h'])
-cxx_validator(src='validator_ngng628.cpp', flags=['-std=c++2a'], dependency=['testlib.h'])
-cxx_validator(src='validator_logK.cpp', flags=['-std=c++2a'], dependency=['testlib.h'])
+#cxx_validator(src='validator_ngng628.cpp', flags=['-std=c++2a'], dependency=['testlib.h'])
+#cxx_validator(src='validator_logK.cpp', flags=['-std=c++2a'], dependency=['testlib.h'])
 #java_validator(src='Validator.java', encoding='UTF-8',
 #               mainclass='tmp/validator/Validator')
 #rust_validator(src='validator.rs')
@@ -45,7 +45,8 @@ cxx_judge(src='judge.cpp', flags=['-std=c++2a'], dependency=['testlib.h'], varia
 #gcj_merger(output_replace=casenum_replace('Case 1', 'Case {0}'))
 id='I'
 #merged_testset(name=id + '_Merged', input_pattern='*.in')
-subtask_testset(name='task', score=70, input_patterns=['00_sample*.in','01_subtask*.in','02_random*.in', '03_hand*.in'])
-subtask_testset(name='subtask', score=30, input_patterns=['01_subtask*.in'])
+subtask_testset(name='task', score=40, input_patterns=['*.in'])
+subtask_testset(name='subtask_easy', score=30, input_patterns=['*subtask1*.in'])
+subtask_testset(name='subtask_normal', score=30, input_patterns=['*subtask2*.in'])
 # precisely scored by judge program like Jiyukenkyu (KUPC 2013)
 #scoring_judge()
