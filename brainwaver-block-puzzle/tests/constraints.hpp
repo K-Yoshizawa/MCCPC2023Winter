@@ -2,8 +2,8 @@
 const int MIN_VAL = -1'000'000'000;
 const int MAX_VAL = 1'000'000'000;
 
-const int MIN_VAL_SUBTASK = -100;
-const int MAX_VAL_SUBTASK = 100;
+const int MIN_VAL_SUBTASK = -500;
+const int MAX_VAL_SUBTASK = 500;
 
 const int MIN_SX = MIN_VAL;
 const int MIN_SY = MIN_VAL;
