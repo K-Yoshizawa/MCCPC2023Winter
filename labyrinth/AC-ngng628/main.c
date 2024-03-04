@@ -44,6 +44,7 @@ int same(int x, int y) {
 
 
 char ans[2*N_MAX + 2][2*N_MAX + 3];  // メモリ使用量が大きいのでグローバル変数にする
+int node[2*N_MAX + 2][2*N_MAX + 2];  // グリッドの行列とグラフの頂点番号を対応付けるための変数
 int main(void) {
    //────────────────────────────────────────────────────────────────────
    // 1. 入力
@@ -108,6 +109,13 @@ int main(void) {
    //────────────────────────────────────────────────────────────────────
    init(height * width + 2*width + 1);
 
+   for (int i = 1, index = 0; i <= height; i++) {
+      for (int j = 1; j <= width; j++) {
+         node[i][j] = index;
+         index++;
+      }
+   }
+
    int di[5] = {0, 0, 1, 0, -1};
    int dj[5] = {0, 1, 0, -1, 0};
    for (int i = 1; i <= height; i++) {
@@ -122,9 +130,7 @@ int main(void) {
                continue;
             }
             if (ans[ni][nj] == '.') {
-               int u = i * width + j;
-               int v = ni * width + nj;
-               unite(u, v);
+               unite(node[i][j], node[ni][nj]);
             }
          }
       }
@@ -147,8 +153,8 @@ int main(void) {
                if (ni1 < 1 || ni1 > height || nj1 < 1 || nj1 > width) continue;
                if (ni2 < 1 || ni2 > height || nj2 < 1 || nj2 > width) continue;
                if (ans[ni1][nj1] == '.' && ans[ni2][nj2] == '.') {
-                  int v1 = ni1 * width + nj1;
-                  int v2 = ni2 * width + nj2;
+                  int v1 = node[ni1][nj1];
+                  int v2 = node[ni2][nj2];
                   if (same(v1, v2)) {
                      ans[i][j] = '#';
                   }
@@ -158,11 +164,12 @@ int main(void) {
          if (ans[i][j] == '?') {
             ans[i][j] = '.';
             for (int k1 = 1; k1 <= 4; k1++) {
-               int ni = i + di[k1], nj = j + dj[k1];
+               int ni = i + di[k1];
+               int nj = j + dj[k1];
                if (ni < 1 || ni > height || nj < 1 || nj > width || ans[ni][nj] != '.') {
                   continue;
                }
-               unite(i * width + j, ni * width + nj);
+               unite(node[i][j], node[ni][nj]);
             }
          }
       }
@@ -171,14 +178,37 @@ int main(void) {
    //────────────────────────────────────────────────────────────────────
    // 6. 本当に要件を満たしているかを判定する
    //────────────────────────────────────────────────────────────────────
-   int leader = find(2*width + 2);
+   // 到達できない床がないかチェック
+   int leader = find(node[2][2]);
    for (int i = 1; i <= height; i++) {
       for (int j = 1; j <= width; j++) {
          if (ans[i][j] == '.') {
-            if (leader != find(i * width + j)) {
+            if (leader != find(node[i][j])) {
                printf("No\n");
                return 0;
             }
+         }
+      }
+   }
+
+   // 閉路ができていないかチェック
+   init(height * width + 2*width + 1);
+   for (int i = 1; i <= height; i++) {
+      for (int j = 1; j <= width; j++) {
+         if (ans[i][j] != '.') {
+            continue;
+         }
+         for (int k = 1; k <= 2; k++) {
+            int ni = i + di[k];
+            int nj = j + dj[k];
+            if (ans[ni][nj] != '.') {
+               continue;
+            }
+            if (find(node[i][j]) == find(node[ni][nj])) {
+               printf("No\n");
+               return 0;
+            }
+            unite(node[i][j], node[ni][nj]);
          }
       }
    }
