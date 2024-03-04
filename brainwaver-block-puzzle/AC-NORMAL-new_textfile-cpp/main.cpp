@@ -15,10 +15,10 @@ int main(){
     cin >> sx >> sy >> gx >> gy;
     
     ll minx = min(sx,gx)-2, miny = min(sy,gy)-2, maxx = max(sx,gx)+2, maxy = max(sy,gy)+2;
-    map<array<ll,3>, array<ll,3>> prev;
+    vector prev(maxx-minx+1, vector(maxy-miny+1, vector<array<ll,3>>(6, {-1,-1,-1})));
     queue<array<ll,3>> que;
-    prev[{sx, sy, TOP}] = {-1,-1,-1};
-    que.push({sx,sy,TOP});
+    prev[sx-minx][sy-miny][TOP] = {-2,-2,-2};
+    que.push({sx-minx,sy-miny,TOP});
     
     while(!que.empty()){
         auto [x,y,dir] = que.front();
@@ -33,22 +33,22 @@ int main(){
             else if(dir == WEST) ndir = BOTTOM;
             else if(dir == BOTTOM) ndir = EAST;
             
-            if(minx <= nx && nx <= maxx && prev.count({nx,ny,ndir}) == 0){
-                prev[{nx,ny,ndir}] = {x,y,dir};
+            if(0 <= nx && nx < maxx-minx+1 && prev[nx][ny][ndir] == array<ll,3>({-1,-1,-1})){
+                prev[nx][ny][ndir] = {x,y,dir};
                 que.push({nx,ny,ndir});
             }
         }
 
         // R
         {
-            nx = x+1, ny = y, ndir = dir;
+            nx = x+1;
             if(dir == TOP) ndir = EAST;
             else if(dir == EAST) ndir = BOTTOM;
             else if(dir == WEST) ndir = TOP;
             else if(dir == BOTTOM) ndir = WEST;
 
-            if(minx <= nx && nx <= maxx && prev.count({nx,ny,ndir}) == 0){
-                prev[{nx,ny,ndir}] = {x,y,dir};
+            if(0 <= nx && nx < maxx-minx+1 && prev[nx][ny][ndir] == array<ll,3>({-1,-1,-1})){
+                prev[nx][ny][ndir] = {x,y,dir};
                 que.push({nx,ny,ndir});
             }
         }
@@ -61,31 +61,32 @@ int main(){
             else if(dir == NORTH) ndir = BOTTOM;
             else if(dir == BOTTOM) ndir = SOUTH;
             
-            if(miny <= ny && ny <= maxy && prev.count({nx,ny,ndir}) == 0){
-                prev[{nx,ny,ndir}] = {x,y,dir};
+            if(0 <= ny && ny < maxy-miny+1 && prev[nx][ny][ndir] == array<ll,3>({-1,-1,-1})){
+                prev[nx][ny][ndir] = {x,y,dir};
                 que.push({nx,ny,ndir});
             }
         } 
 
         // D
         {
-            nx = x, ny = y-1, ndir = dir;
+            ny = y-1;
             if(dir == TOP) ndir = SOUTH;
             else if(dir == SOUTH) ndir = BOTTOM;
             else if(dir == NORTH) ndir = TOP;
             else if(dir == BOTTOM) ndir = NORTH;
             
-            if(miny <= ny && ny <= maxy && prev.count({nx,ny,ndir}) == 0){
-                prev[{nx,ny,ndir}] = {x,y,dir};
+            if(0 <= ny && ny < maxy-miny+1 && prev[nx][ny][ndir] == array<ll,3>({-1,-1,-1})){
+                prev[nx][ny][ndir] = {x,y,dir};
                 que.push({nx,ny,ndir});
             }
         }
     }
+
     
     vector<pair<char,ll>> ans;
 
-    ll x = gx, y = gy;
-    for(array<ll,3> t = prev[{x,y,BOTTOM}]; t != array<ll,3>({-1,-1,-1}); t = prev[t]){
+    ll x = gx-minx, y = gy-miny, dir = BOTTOM;
+    for(array<ll,3> t = prev[x][y][dir]; t != array<ll,3>({-2,-2,-2}); t = prev[x][y][dir]){
         ll dx = x-t[0], dy = y-t[1];
         
         if(dx == 1) ans.emplace_back('R', 1);
@@ -93,7 +94,7 @@ int main(){
         else if(dy == 1) ans.emplace_back('U', 1);
         else if(dy == -1) ans.emplace_back('D', 1);
 
-        x = t[0], y = t[1];
+        x = t[0], y = t[1], dir = t[2];
     }
     reverse(ans.begin(), ans.end());
     
