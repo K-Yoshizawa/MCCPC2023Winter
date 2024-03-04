@@ -4,13 +4,13 @@ using namespace std;
 
 // 制約用
 const int MIN_N = 2;
-const int MAX_N = 500;
+const int MAX_N = 700;
 
 // ケース生成用
-const int MIN_SMALL_N = 50;
-const int MAX_SMALL_N = 100;
-const int MIN_LARGE_N = 450;
-const int MAX_LARGE_N = 500;
+const int MIN_SMALL_N = 70;
+const int MAX_SMALL_N = 140;
+const int MIN_LARGE_N = 630;
+const int MAX_LARGE_N = 700;
 
 int dy[] = {0, 0, -1, 1};
 int dx[] = {-1, 1, 0, 0};
@@ -205,9 +205,6 @@ void main_gen(string case_name, int N, int mode = 0){
             break;
         }
     }
-    if(mode == 4){
-        
-    }
 
     of << N << " " << S.size() << endl;
     of << S << endl;
@@ -280,28 +277,85 @@ int main(int argc, char* argv[]){
             of.close();
         }
         // Yes small
-        for(int i = 0; i < 10; ++i){
+        for(int i = 0; i < 5; ++i){
             main_gen(::format("22_small_%02d.in", i + 1).c_str(), rnd.next(MIN_SMALL_N, MAX_SMALL_N));
         }
         // Yes large
-        for(int i = 0; i < 10; ++i){
+        for(int i = 0; i < 5; ++i){
             main_gen(::format("23_large_%02d.in", i + 1).c_str(), rnd.next(MIN_LARGE_N, MAX_LARGE_N));
         }
         // Yes max
-        for(int i = 0; i < 10; ++i){
+        for(int i = 0; i < 20; ++i){
             main_gen(::format("24_max_%02d.in", i + 1).c_str(), rnd.next(MAX_N, MAX_N));
         }
+        // Yes shortest
+        {
+            ofstream of(::format("25_shortest_01.in").c_str());
+            of << "700 2796" << endl;
+            for(int i = 0; i < MAX_N - 1; ++i) of << "RR";
+            for(int i = 0; i < MAX_N - 1; ++i) of << "DD";
+            of << endl;
+            of.close();
+        }
+        {
+            ofstream of(::format("25_shortest_02.in").c_str());
+            of << "700 2796" << endl;
+            for(int i = 0; i < MAX_N - 1; ++i) of << "DD";
+            for(int i = 0; i < MAX_N - 1; ++i) of << "RR";
+            of << endl;
+            of.close();
+        }
+        // Yes longest
+        {
+            ofstream of(::format("26_longest_01.in").c_str());
+            of << "699 977200" << endl;
+            for(int i = 0; i < MAX_N - 1; ++i){
+                for(int j = 0; j < MAX_N - 2; ++j){
+                    if(i % 2) of << "LL";
+                    else of << "RR";
+                }
+                if(i != MAX_N - 2) of << "DD";
+            }
+            of << endl;
+            of.close();
+        }
+        {
+            ofstream of(::format("26_longest_02.in").c_str());
+            of << "699 977200" << endl;
+            for(int i = 0; i < MAX_N - 1; ++i){
+                for(int j = 0; j < MAX_N - 2; ++j){
+                    if(i % 2) of << "UU";
+                    else of << "DD";
+                }
+                if(i != MAX_N - 2) of << "RR";
+            }
+            of << endl;
+            of.close();
+        }
         // No 1
-        for(int i = 0; i < 5; ++i){
-            main_gen(::format("25_ng_%02d.in", i + 1).c_str(), rnd.next(MIN_N, MAX_N), 1);
+        for(int i = 0; i < 3; ++i){
+            main_gen(::format("31_ng_%02d.in", i + 1).c_str(), rnd.next(MIN_N, MAX_N), 1);
         }
         // No 2
-        for(int i = 5; i < 10; ++i){
-            main_gen(::format("25_ng_%02d.in", i + 1).c_str(), rnd.next(MIN_N, MAX_N), 2);
+        for(int i = 0; i < 3; ++i){
+            main_gen(::format("32_ng_%02d.in", i + 1).c_str(), rnd.next(MIN_N, MAX_N), 2);
         }
         // No 3
-        for(int i = 10; i < 15; ++i){
-            main_gen(::format("25_ng_%02d.in", i + 1).c_str(), rnd.next(MIN_N, MAX_N), 3);
+        for(int i = 0; i < 3; ++i){
+            main_gen(::format("33_ng_%02d.in", i + 1).c_str(), rnd.next(MIN_N, MAX_N), 3);
+        }
+        // No 4
+        {
+            ofstream of(::format("34_ng_01.in").c_str());
+            of << "2 12" << endl;
+            of << "RRDDLLUURRDD" << endl;
+            of.close();
+        }
+        {
+            ofstream of(::format("34_ng_02.in").c_str());
+            of << "2 12" << endl;
+            of << "DDRRUULLDDRR" << endl;
+            of.close();
         }
     }
 }
