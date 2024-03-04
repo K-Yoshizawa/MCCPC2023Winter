@@ -2,9 +2,9 @@
 # include "testlib.h"
 
 const int N_MIN = 1;
-const int N_MAX = 1500;
+const int N_MAX = 700;
 const int M_MIN = 1;
-const int M_MAX = 2*N_MAX*N_MAX;
+const int M_MAX = 1e6;
 
 int main(int argc, char* argv[]) {
    registerValidation(argc, argv);
