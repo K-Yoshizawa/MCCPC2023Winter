@@ -2,8 +2,8 @@
 #include "testlib.h"
 using namespace std;
 
-const int MIN = -100000;
-const int MAX = 100000;
+const int MIN = -1000000000;
+const int MAX = 1000000000;
 
 int main(int argc, char *argv[]){
     registerValidation(argc, argv);

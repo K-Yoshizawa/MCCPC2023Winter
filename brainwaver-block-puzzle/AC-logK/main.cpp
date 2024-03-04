@@ -1,34 +1,66 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+using ll = long long;
+
 int main(){
-    int sx, sy, gx, gy;
+    ll sx, sy, gx, gy;
     cin >> sx >> sy >> gx >> gy;
 
-    int gap_x = (gx - sx + 400002) % 4;
-    string S;
+    vector<pair<char, ll>> ans;
+
+    ll gap_x = (gx - sx + 2000000002LL) % 4;
     switch(gap_x){
         case 0 : break;
-        case 1 : S += "URDL"; break;
-        case 2 : S += "UULDDR"; break;
-        case 3 : S += "ULDR"; break;
+        case 1 :
+            ans.emplace_back('U', 1);
+            ans.emplace_back('R', 1);
+            ans.emplace_back('D', 1);
+            ans.emplace_back('L', 1);
+            break;
+        case 2 :
+            ans.emplace_back('U', 2);
+            ans.emplace_back('L', 1);
+            ans.emplace_back('D', 2);
+            ans.emplace_back('R', 1);
+            break;
+        case 3 :
+            ans.emplace_back('U', 1);
+            ans.emplace_back('L', 1);
+            ans.emplace_back('D', 1);
+            ans.emplace_back('R', 1);
+            break;
     }
-    int dx = abs(gx - sx), rev_x = gx < sx;
-    for(int i = 0; i < dx; ++i){
-        S += (rev_x ? "L" : "R");
-    }
+    int dx = abs(gx - sx);
+    if(dx > 0) ans.emplace_back(gx < sx ? 'L' : 'R', dx);
 
-    int gap_y = (gy - sy + 400000) % 4;
+    int gap_y = (gy - sy + 2000000000LL) % 4;
     switch(gap_y){
         case 0 : break;
-        case 1 : S += "RULD"; break;
-        case 2 : S += "RRULLD"; break;
-        case 3 : S += "RDLU"; break;
+        case 1 :
+            ans.emplace_back('R', 1);
+            ans.emplace_back('U', 1);
+            ans.emplace_back('L', 1);
+            ans.emplace_back('D', 1);
+            break;
+        case 2 :
+            ans.emplace_back('R', 2);
+            ans.emplace_back('U', 1);
+            ans.emplace_back('L', 2);
+            ans.emplace_back('D', 1);
+            break;
+        case 3 :
+            ans.emplace_back('R', 1);
+            ans.emplace_back('D', 1);
+            ans.emplace_back('L', 1);
+            ans.emplace_back('U', 1);
+            break;
     }
     int dy = abs(gy - sy), rev_y = gy < sy;
-    for(int i = 0; i < dy; ++i){
-        S += (rev_y ? "D" : "U");
+    if(dy > 0) ans.emplace_back(gy < sy ? 'D' : 'U', dy);
+    
+    cout << ans.size() << endl;
+    for(auto [D, L] : ans){
+        cout << D << " " << L << endl;
     }
-    cout << S.size() << endl;
-    cout << S << endl;
 }
