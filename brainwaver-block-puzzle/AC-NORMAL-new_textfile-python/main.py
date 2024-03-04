@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env pypy3
 from collections import deque
 
 TOP=0
@@ -17,20 +17,20 @@ maxy = max(sy,gy)+2
 
 prev = [[[(-1,-1,-1) for _ in range(6)] for _ in range(maxy-miny+1)] for _ in range(maxx-minx+1)]
 
-que = deque([])
+que = deque()
 prev[sx-minx][sy-miny][TOP] = (-2,-2,-2)
 que.append((sx-minx,sy-miny,TOP));
 
-while len(que) > 0:
+while que:
     x,y,dir = que[0]
     que.popleft()
 
     #L
     nx, ny, ndir = x-1, y, dir
     if dir == TOP: ndir = WEST
-    if dir == EAST: ndir = TOP
-    if dir == WEST: ndir = BOTTOM
-    if dir == BOTTOM: ndir = EAST
+    elif dir == EAST: ndir = TOP
+    elif dir == WEST: ndir = BOTTOM
+    elif dir == BOTTOM: ndir = EAST
 
     if 0 <= nx and nx < maxx-minx+1 and prev[nx][ny][ndir] == (-1,-1,-1):
         prev[nx][ny][ndir] = (x,y,dir);
@@ -38,11 +38,11 @@ while len(que) > 0:
     
     
     #R
-    nx, ny, ndir = x+1, y, dir
+    nx = x+1
     if dir == TOP: ndir = EAST
-    if dir == EAST: ndir = BOTTOM
-    if dir == WEST: ndir = TOP
-    if dir == BOTTOM: ndir = WEST
+    elif dir == EAST: ndir = BOTTOM
+    elif dir == WEST: ndir = TOP
+    elif dir == BOTTOM: ndir = WEST
 
     if 0 <= nx and nx < maxx-minx+1 and prev[nx][ny][ndir] == (-1,-1,-1):
         prev[nx][ny][ndir] = (x,y,dir);
@@ -52,9 +52,9 @@ while len(que) > 0:
     #U
     nx, ny, ndir = x, y+1, dir
     if dir == TOP: ndir = NORTH
-    if dir == SOUTH: ndir = TOP
-    if dir == NORTH: ndir = BOTTOM
-    if dir == BOTTOM: ndir = SOUTH
+    elif dir == SOUTH: ndir = TOP
+    elif dir == NORTH: ndir = BOTTOM
+    elif dir == BOTTOM: ndir = SOUTH
 
     if 0 <= ny and ny < maxy-miny+1 and prev[nx][ny][ndir] == (-1,-1,-1):
         prev[nx][ny][ndir] = (x,y,dir);
@@ -62,11 +62,11 @@ while len(que) > 0:
 
 
     #D
-    nx, ny, ndir = x, y-1, dir
+    ny = y-1
     if dir == TOP: ndir = SOUTH
-    if dir == SOUTH: ndir = BOTTOM
-    if dir == NORTH: ndir = TOP
-    if dir == BOTTOM: ndir = NORTH
+    elif dir == SOUTH: ndir = BOTTOM
+    elif dir == NORTH: ndir = TOP
+    elif dir == BOTTOM: ndir = NORTH
 
     if 0 <= ny and ny < maxy-miny+1 and prev[nx][ny][ndir] == (-1,-1,-1):
         prev[nx][ny][ndir] = (x,y,dir);
@@ -82,9 +82,9 @@ while t != (-2,-2,-2):
     dx, dy = x-prevx, y-prevy
     
     if dx == 1: ans.append(('R',1))
-    if dx == -1: ans.append(('L',1))
-    if dy == 1: ans.append(('U',1))
-    if dy == -1: ans.append(('D',1))
+    elif dx == -1: ans.append(('L',1))
+    elif dy == 1: ans.append(('U',1))
+    elif dy == -1: ans.append(('D',1))
 
     x, y, dir = prevx, prevy, prevdir
     t = prev[x][y][dir]    

@@ -29,9 +29,9 @@ int main(){
         {
             nx = x-1, ny = y, ndir = dir;
             if(dir == TOP) ndir = WEST; 
-            if(dir == EAST) ndir = TOP;
-            if(dir == WEST) ndir = BOTTOM;
-            if(dir == BOTTOM) ndir = EAST;
+            else if(dir == EAST) ndir = TOP;
+            else if(dir == WEST) ndir = BOTTOM;
+            else if(dir == BOTTOM) ndir = EAST;
             
             if(minx <= nx && nx <= maxx && prev.count({nx,ny,ndir}) == 0){
                 prev[{nx,ny,ndir}] = {x,y,dir};
@@ -43,9 +43,9 @@ int main(){
         {
             nx = x+1, ny = y, ndir = dir;
             if(dir == TOP) ndir = EAST;
-            if(dir == EAST) ndir = BOTTOM;
-            if(dir == WEST) ndir = TOP;
-            if(dir == BOTTOM) ndir = WEST;
+            else if(dir == EAST) ndir = BOTTOM;
+            else if(dir == WEST) ndir = TOP;
+            else if(dir == BOTTOM) ndir = WEST;
 
             if(minx <= nx && nx <= maxx && prev.count({nx,ny,ndir}) == 0){
                 prev[{nx,ny,ndir}] = {x,y,dir};
@@ -57,9 +57,9 @@ int main(){
         {
             nx = x, ny = y+1, ndir = dir;
             if(dir == TOP) ndir = NORTH; 
-            if(dir == SOUTH) ndir = TOP;
-            if(dir == NORTH) ndir = BOTTOM;
-            if(dir == BOTTOM) ndir = SOUTH;
+            else if(dir == SOUTH) ndir = TOP;
+            else if(dir == NORTH) ndir = BOTTOM;
+            else if(dir == BOTTOM) ndir = SOUTH;
             
             if(miny <= ny && ny <= maxy && prev.count({nx,ny,ndir}) == 0){
                 prev[{nx,ny,ndir}] = {x,y,dir};
@@ -71,9 +71,9 @@ int main(){
         {
             nx = x, ny = y-1, ndir = dir;
             if(dir == TOP) ndir = SOUTH;
-            if(dir == SOUTH) ndir = BOTTOM;
-            if(dir == NORTH) ndir = TOP;
-            if(dir == BOTTOM) ndir = NORTH;
+            else if(dir == SOUTH) ndir = BOTTOM;
+            else if(dir == NORTH) ndir = TOP;
+            else if(dir == BOTTOM) ndir = NORTH;
             
             if(miny <= ny && ny <= maxy && prev.count({nx,ny,ndir}) == 0){
                 prev[{nx,ny,ndir}] = {x,y,dir};
@@ -89,9 +89,9 @@ int main(){
         ll dx = x-t[0], dy = y-t[1];
         
         if(dx == 1) ans.emplace_back('R', 1);
-        if(dx == -1) ans.emplace_back('L', 1);
-        if(dy == 1) ans.emplace_back('U', 1);
-        if(dy == -1) ans.emplace_back('D', 1);
+        else if(dx == -1) ans.emplace_back('L', 1);
+        else if(dy == 1) ans.emplace_back('U', 1);
+        else if(dy == -1) ans.emplace_back('D', 1);
 
         x = t[0], y = t[1];
     }
