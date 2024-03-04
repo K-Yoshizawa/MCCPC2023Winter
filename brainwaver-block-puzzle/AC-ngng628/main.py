@@ -3,6 +3,7 @@
 from random import randint
 from copy import deepcopy
 import itertools
+from collections import Counter
 
 class Dice:
    UP    = 0
@@ -73,60 +74,96 @@ class Dice:
    def _swap(self, i, j):
       self.f[i], self.f[j] = self.f[j], self.f[i]
 
+
+def solve(sx, sy, gx, gy):
+   # 適当に近づく
+   dx, dy = gx - sx, gy - sy
+   if dx < -30:
+      l = abs(dx) - 10
+      l = l - l % 4
+      assert(l % 4 == 0)
+      ans.append(('L', l))
+      sx = sx - l
+   if dx > 30:
+      l = abs(dx) - 10
+      l = l - l % 4
+      assert(l % 4 == 0)
+      ans.append(('R', l))
+      sx = sx + l
+   if dy > 30:
+      l = abs(dy) - 10
+      l = l - l % 4
+      assert(l % 4 == 0)
+      ans.append(('U', l))
+      sy = sy + l
+   if dy < -30:
+      l = abs(dy) - 10
+      l = l - l % 4
+      assert(l % 4 == 0)
+      ans.append(('D', l))
+      sy = sy - l
+
+   # 厳密に近づく
+   dice = Dice(sx, sy, ['mark', '1', '2', '3', '4', '5'])
+   while dice.x != gx or dice.y != gy:
+      if dice.x < gx:
+         ans.append(('R', 1))
+         dice.rotate(Dice.RIGHT)
+      if dice.y < gy:
+         ans.append(('U', 1))
+         dice.rotate(Dice.BACK)
+      if dice.x > gx:
+         ans.append(('L', 1))
+         dice.rotate(Dice.LEFT)
+      if dice.y > gy:
+         ans.append(('D', 1))
+         dice.rotate(Dice.FWD)
+
+
+   if dice.f[Dice.DOWN] == 'mark':
+      return ans
+
+
+   op_to_char = {
+      Dice.BACK: 'U',
+      Dice.LEFT: 'L',
+      Dice.RIGHT: 'R',
+      Dice.FWD: 'D',
+   }
+
+   for op1 in itertools.permutations([Dice.FWD, Dice.RIGHT, Dice.BACK, Dice.LEFT]):
+      d = Dice(dice.x, dice.y, deepcopy(dice.f))
+      for op in op1:
+         d.rotate(op)
+
+      if d.f[Dice.DOWN] == 'mark' and d.x == gx and d.y == gy:
+         ans1 = [(op_to_char[op], 1) for op in op1]
+         return ans + ans1
+
+      for op2 in itertools.permutations([Dice.FWD, Dice.RIGHT, Dice.BACK, Dice.LEFT]):
+         d2 = Dice(d.x, d.y, deepcopy(d.f))
+         for op in op2:
+            d2.rotate(op)
+         if d2.f[Dice.DOWN] == 'mark' and d2.x == gx and d2.y == gy:
+            ans1 = [(op_to_char[op], 1) for op in op1]
+            ans2 = [(op_to_char[op], 1) for op in op2]
+            return ans + ans1 + ans2
+
+   return None
+
+
 sx, sy, gx, gy = map(int, input().split())
-dice = Dice(sx, sy, ['mark', '1', '2', '3', '4', '5'])
 ans = []
-while dice.x != gx or dice.y != gy:
-   if dice.x < gx:
-      ans.append('R')
-      dice.rotate(Dice.RIGHT)
-   if dice.y < gy:
-      ans.append('U')
-      dice.rotate(Dice.BACK)
-   if dice.x > gx:
-      ans.append('L')
-      dice.rotate(Dice.LEFT)
-   if dice.y > gy:
-      ans.append('D')
-      dice.rotate(Dice.FWD)
-
-
-if dice.f[Dice.DOWN] == 'mark':
-   print(len(ans))
-   print(''.join(ans))
-   exit()
-
 
 op_to_char = {
-   Dice.BACK: 'U',
-   Dice.LEFT: 'L',
-   Dice.RIGHT: 'R',
-   Dice.FWD: 'D',
+   'U' : Dice.BACK,
+   'L': Dice.LEFT,
+   'R': Dice.RIGHT,
+   'D': Dice.FWD,
 }
 
-for op1 in itertools.permutations([Dice.FWD, Dice.RIGHT, Dice.BACK, Dice.LEFT]):
-   d = Dice(dice.x, dice.y, deepcopy(dice.f))
-   for op in op1:
-      d.rotate(op)
+ans = solve(sx, sy, gx, gy)
 
-   if d.f[Dice.DOWN] == 'mark':
-      ans1 = [op_to_char[op] for op in op1]
-      print(len(ans) + 4)
-      print(''.join(ans + ans1))
-      exit()
-
-   for op2 in itertools.permutations([Dice.FWD, Dice.RIGHT, Dice.BACK, Dice.LEFT]):
-      d2 = Dice(d.x, d.y, deepcopy(d.f))
-      for op in op2:
-         d2.rotate(op)
-      if op1 == (Dice.RIGHT, Dice.BACK, Dice.LEFT, Dice.FWD) and op2 == (Dice.FWD, Dice.RIGHT, Dice.BACK, Dice.LEFT):
-         print('here')
-         print(d.f, d2.f)
-      if d2.f[Dice.DOWN] == 'mark':
-         ans1 = [op_to_char[op] for op in op1]
-         ans2 = [op_to_char[op] for op in op2]
-         print(len(ans) + 8)
-         print(''.join(ans + ans1 + ans2))
-         exit()
-
-print('None')
+print(len(ans))
+for i, j in ans:
+   print(f'{i} {j}')

@@ -1,8 +1,8 @@
 # include "testlib.h"
 # include <bits/stdc++.h>
 
-constexpr int MIN = -1e5;
-constexpr int MAX = 1e5;
+constexpr int MIN = -1e9;
+constexpr int MAX = 1e9;
 
 int main(int argc, char* argv[]){
    registerValidation(argc, argv);
