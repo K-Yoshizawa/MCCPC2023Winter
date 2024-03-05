@@ -72,18 +72,6 @@ struct Graph {
         }
     }
 
-    void debug()
-    {
-        rep(i, g.size())
-        {
-            cerr << i << ": ";
-            for (auto& e : g[i]) {
-                cerr << e.to << ", ";
-            }
-            cerr << endl;
-        }
-    }
-
     inline vector<Edge<T>>& operator[](const int& k)
     {
         return g[k];
@@ -130,9 +118,9 @@ int main()
         }
         return ret;
     };
-    int ans = 0;
+    int64_t ans = 0;
     for (int i = 0; i < N - 1; i++) {
-        int v = rec(rec, x[i] - 1, -1);
+        int64_t v = rec(rec, x[i] - 1, -1);
         ans += v * v;
     }
     cout << ans << endl;
