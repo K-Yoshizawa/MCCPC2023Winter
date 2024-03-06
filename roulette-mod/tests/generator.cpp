@@ -2,13 +2,13 @@
 #include <cassert>
 #include "testlib.h"
 #include "constraints.hpp"
-using namespace std;
+//using namespace std;
 
 const int MIN_M_SMALL = 1;
 const int MAX_M_SMALL = 100;
 
-void output(vector<array<int,2>> &inputs, string filename){
-    ofstream of(filename);
+void output(std::vector<std::array<int,2>> &inputs, std::string filename){
+    std::ofstream of(filename);
 
     of << inputs.size() << '\n';
     for(int i = 0; i < inputs.size(); i++){
@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
     
     // サンプル
     {
-        vector<array<int,2>> sample_inputs;
+        std::vector<std::array<int,2>> sample_inputs;
         sample_inputs.push_back({6, 100});
         sample_inputs.push_back({1, 1000000000});
         output(sample_inputs, "00_sample_01.in");
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 
     //ランダム(Mが小さいケース)
     for (int i = 0; i < 2; i++){
-        vector<array<int,2>> inputs;
+        std::vector<std::array<int,2>> inputs;
 
         for(int t = 0; t < MAX_T; t++){
             int N = rnd.next(MIN_N, MAX_N);
@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
     
     //ランダム
     for(int i = 0; i < 2; i++){
-        vector<array<int,2>> inputs;
+        std::vector<std::array<int,2>> inputs;
 
         for(int t = 0; t < MAX_T; t++){
             int N = rnd.next(MIN_N, MAX_N);
@@ -62,7 +62,7 @@ int main(int argc, char** argv) {
         const int hand_case4 = 50;
         const int hand_case_rem = MAX_T - (hand_case1 + 3*hand_case2 + hand_case3 + hand_case4 + 50);
 
-        vector<array<int,2>> hand_inputs;
+        std::vector<std::array<int,2>> hand_inputs;
         // N = M の場合
         for(int i = 0; i < hand_case1; i++){
             int N = rnd.next(MIN_N, MAX_N);
