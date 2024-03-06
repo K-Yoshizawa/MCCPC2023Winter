@@ -1,6 +1,5 @@
 #include "testlib.h"
 #include <bits/stdc++.h>
-using namespace std;
 
 #define rep(i,a,n) for(int i = a; i < n; i++)
 
@@ -8,8 +7,8 @@ const int MIN_N = 2;
 const int MAX_N = 200000;
 
 struct unionfind {
-    vector<int> par;
-    vector<int> sizes;
+    std::vector<int> par;
+    std::vector<int> sizes;
 
     unionfind(int n) : par(n),sizes(n,1){
         rep(i,0,n) par[i] = i;
@@ -26,7 +25,7 @@ struct unionfind {
 
         if(x == y) return;
 
-        if(sizes[x] < sizes[y] ) swap(x,y);
+        if(sizes[x] < sizes[y] ) std::swap(x,y);
 
         par[y] = x;
         sizes[x] += sizes[y];
@@ -60,7 +59,7 @@ int main(int argc, char* argv[]) {
     }
     ensure(uf.size(0) == N);
 
-    vector<bool> used(N);
+    std::vector<bool> used(N);
     used[0] = true;
     for(int i = 0; i < N-1; i++){
         int x = inf.readInt(2, N, format("x_%d", i + 1).c_str());
