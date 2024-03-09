@@ -24,8 +24,6 @@ int main(){
 
     vector<string> ans(n, string(n, '.'));
     vector used(n, vector<bool>(n));
-    
-    //条件から壁マスであることが決まっている場所を '#' にする
     rep(i,0,n){
         rep(j,0,n){
             if(min({i,j,n-1-i,n-1-j}) == 0) ans[i][j] = '#';
@@ -35,7 +33,6 @@ int main(){
         }
     }
     
-    //移動経路のチェック
     ll x = 1, y = 1;
     used[x][y] = true;
     for(auto c : s){
@@ -47,15 +44,15 @@ int main(){
         }
         used[x][y] = true;
     }
+    
     if(x != n-2 || y != n-2){
         cout << "No" << endl;
         return 0;
     }
-
-    //移動経路上のマスからBFSをし、四近傍がすでに訪問済み or 移動できないなら '#' とする
-    //ここ、正当性を示せていません(変な探索のしかたをするとWAになります)
+    
     x = 1, y = 1;
     for(auto c : s){
+        x += dx[dir[c]], y += dy[dir[c]]; //変更点
         rep(i,0,4){
             ll sx = x + dx[i], sy = y + dy[i];
             
@@ -67,9 +64,10 @@ int main(){
                 while(!que.empty()){
                     auto [currx, curry] = que.front();
                     que.pop();
-                    
+
                     bool isleaf = true;
-                    rep(k,0,4){
+                    rep(k_,0,4){
+                        ll k = (k_+3)%4;
                         ll nextx = currx + dx[k], nexty = curry + dy[k];
                         
                         if(used[nextx][nexty]) continue;
@@ -78,14 +76,13 @@ int main(){
                         isleaf = false;
                     }
 
-                    if(isleaf && (currx+curry) % 2 == 1){
+                    if(isleaf){
                         used[currx][curry] = true;
                         ans[currx][curry] = '#';
                     }
                 }
             }
-        } 
-        x += dx[dir[c]], y += dy[dir[c]];
+        }
     }
     
     cout << "Yes" << endl;
