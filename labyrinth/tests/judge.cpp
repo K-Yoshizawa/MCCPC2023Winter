@@ -1,4 +1,7 @@
-#include <bits/stdc++.h>
+#include <string>
+#include <utility>
+#include <map>
+#include <vector>
 #include "testlib.h"
 using namespace std;
 
