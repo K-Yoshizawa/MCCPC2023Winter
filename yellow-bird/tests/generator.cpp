@@ -152,6 +152,13 @@ int main(int argc, char* argv[]){
             of << "3 0" << endl;
             of.close();
         }
+        {
+            ofstream of(format("24_hand_03.in").c_str());
+            of << "150000 300000" << endl;
+            for(int j = 1; j <= 150000; ++j) of << "1 " << j << endl;
+            for(int j = 1; j <= 150000; ++j) of << "2 " << j << endl;
+            of.close();
+        }
     }
 
     return 0;
