@@ -18,5 +18,6 @@ for _ in range(m):
       s = set()
 
 ans = list(map(str, sorted(list(closed))))
-print(len(ans))
+if len(ans) != 0:
+    print('\n'.join(ans))
 
