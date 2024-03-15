@@ -43,9 +43,9 @@ int main(int argc, char* argv[])
     // random
     {
         for (int i = 0; i < 10; i++) {
-            int N = rnd.next(MIN_N, MAX_N_SUBTASK);
-            int M = rnd.next(MIN_M, min(N, MAX_M_SUBTASK));
-            int S = rnd.next(MIN_S, MAX_S_SUBTASK);
+            int N = rnd.next(MIN_N, MAX_N);
+            int M = rnd.next(MIN_M, min(N, MAX_M));
+            int S = rnd.next(MIN_S, MAX_S);
             gen(format("20_random_%02d.in", i + 1).c_str(), N, M, S);
         }
     }

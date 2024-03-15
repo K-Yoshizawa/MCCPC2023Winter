@@ -46,6 +46,6 @@ cxx_validator(src='validator_logK.cpp', flags=['-std=c++2a'], dependency=['testl
 id='X'
 #merged_testset(name=id + '_Merged', input_pattern='*.in')
 subtask_testset(name='subtask', score=50, input_patterns=['*subtask*'])
-subtask_testset(name='All', score=50, input_patterns=['*'])
+subtask_testset(name='All', score=50, input_patterns=['(?!.*sample).*'])
 # precisely scored by judge program like Jiyukenkyu (KUPC 2013)
 #scoring_judge()
