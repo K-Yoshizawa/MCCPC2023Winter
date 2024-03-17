@@ -8,15 +8,29 @@ int main(){
     for(int i = 0; i < N; ++i) cin >> B[i];
     for(int i = 0; i < N; ++i) cin >> C[i];
 
+    vector pre(N + 1, vector(310, vector(310, -1)));
+    vector ofs(N + 1, vector(310, vector(310, 0)));
     vector dp(N + 1, vector(310, vector(310, -1)));
     dp[0][0][0] = 0;
     for(int i = 0; i < N; ++i){
         for(int j = 0; j <= 300; ++j){
             for(int k = 0; k <= 300; ++k){
                 if(dp[i][j][k] == -1) continue;
-                if(j + A[i] <= 300) dp[i + 1][j + A[i]][k] = max(dp[i + 1][j + A[i]][k], dp[i][j][k]);
-                if(k + B[i] <= 300) dp[i + 1][j][k + B[i]] = max(dp[i + 1][j][k + B[i]], dp[i][j][k]);
-                dp[i + 1][j][k] = max(dp[i + 1][j][k], dp[i][j][k] + C[i]);
+                int nj = min(300, j + A[i]), nk = min(300, k + B[i]);
+                if(dp[i + 1][nj][k] < dp[i][j][k]){
+                    dp[i + 1][nj][k] = dp[i][j][k];
+                    pre[i + 1][nj][k] = 0;
+                    ofs[i + 1][nj][k] = max(0, j + A[i] - 300);
+                }
+                if(dp[i + 1][j][nk] < dp[i][j][k]){
+                    dp[i + 1][j][nk] = dp[i][j][k];
+                    pre[i + 1][j][nk] = 1;
+                    ofs[i + 1][j][nk] = max(0, k + B[i] - 300);
+                }
+                if(dp[i + 1][j][k] < dp[i][j][k] + C[i]){
+                    dp[i + 1][j][k] = dp[i][j][k] + C[i];
+                    pre[i + 1][j][k] = 2;
+                }
             }
         }
     }
@@ -35,16 +49,17 @@ int main(){
     }
     vector<int> ans;
     for(int i = N; i > 0; --i){
-        if(a - A[i - 1] >= 0 and dp[i - 1][a - A[i - 1]][b] == dp[i][a][b]){
-            ans.push_back(0);
-            a -= A[i - 1];
-        }
-        else if(b - B[i - 1] >= 0 and dp[i - 1][a][b - B[i - 1]] == dp[i][a][b]){
-            ans.push_back(1);
-            b -= B[i - 1];
-        }
-        else{
-            ans.push_back(2);
+        int p = pre[i][a][b];
+        ans.push_back(p);
+        switch(p){
+            case 0 :
+                a -= A[i - 1] - ofs[i][a][b];
+                break;
+            case 1 :
+                b -= B[i - 1] - ofs[i][a][b];
+                break;
+            case 2 :
+                break;
         }
     }
     reverse(ans.begin(), ans.end());
