@@ -1,6 +1,4 @@
 #include "testlib.h"
-#include "bits/stdc++.h"
-#include "constraints.hpp"
 
 using namespace std;
 
