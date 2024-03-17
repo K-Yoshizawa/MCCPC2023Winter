@@ -23,12 +23,16 @@ int main(int argc, char* argv[]) {
       inf.ensuref(c != '1', "bat 1");
    }
 
-   if (n == d) {
+   if (n == d && n != 1) {
       bool all0 = true;
       for (char c : s) {
          all0 &= c == '0';
       }
       inf.ensuref(!all0, "all 0 && n == d");
+   }
+
+   if (n == d && n != 1) {
+      inf.ensuref(s[0] != '0', "n == d => s0 != 0");
    }
 
    return 0;

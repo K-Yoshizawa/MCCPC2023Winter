@@ -73,7 +73,11 @@ int main(int argc, char* argv[]) {
       int n{N_MAX - (ts - 1)};
       int d{rnd.next(n, D_MAX)};
       of << n << ' ' << d << std::endl;
-      of << rnd.next(format("[09]{%d}", n)) << std::endl;
+      std::string s = rnd.next(format("[023456789]{%d}", n));
+      while (s[0] == '0') {
+         s = rnd.next(format("[023456789]{%d}", n));
+      }
+      of << s << std::endl;
    }
 
    // N = 1, ..., 3 && d = D_MAX - eps のケース
@@ -82,7 +86,11 @@ int main(int argc, char* argv[]) {
       int n{rnd.next(1, 3)};
       int d{rnd.next(D_MAX - 3, D_MAX)};
       of << n << ' ' << d << std::endl;
-      of << rnd.next(format("[09]{%d}", n)) << std::endl;
+      std::string s = rnd.next(format("[023456789]{%d}", n));
+      while (s[0] == '0') {
+         s = rnd.next(format("[023456789]{%d}", n));
+      }
+      of << s << std::endl;
    }
 
    // 0 のみ
@@ -112,5 +120,38 @@ int main(int argc, char* argv[]) {
       int d{rnd.next(D_MAX - 3, D_MAX)};
       of << n << ' ' << d << std::endl;
       of << rnd.next(format("[9]{%d}", n)) << std::endl;
+   }
+
+   // N = D
+   for (int ts{1}; ts <= 2; ts++) {
+      std::ofstream of(format("08_n_eq_d_%02d.in", ts).c_str());
+      int n = rnd.next(N_MIN, N_MAX);
+      int d = n;
+      of << n << ' ' << d << std::endl;
+      std::string s = rnd.next(format("[023456789]{%d}", n));
+      while (s[0] == '0') {
+         s = rnd.next(format("[023456789]{%d}", n));
+      }
+      of << s << std::endl;
+      of.close();
+   }
+
+   // 答えが 0 になる
+   for (int ts{1}; ts <= 3; ts++) {
+      std::ofstream of(format("09_min_%02d.in", ts).c_str());
+      int n{1};
+      int d{1};
+      of << n << ' ' << d << std::endl;
+      int v;
+      if (ts == 1) {
+         v = 0;
+      }
+      else if (ts == 2) {
+         v = 2;
+      }
+      else {
+         v = 9;
+      }
+      of << rnd.next(format("[%d]{%d}", v, n)) << std::endl;
    }
 }
