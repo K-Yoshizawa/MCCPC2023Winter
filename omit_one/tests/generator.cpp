@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
    {
       std::ofstream of("00_sample_01.in");
       of << "3 4" << std::endl;
-      of << "314" << std::endl;
+      of << "354" << std::endl;
       of.close();
    }
    {
@@ -32,25 +32,25 @@ int main(int argc, char* argv[]) {
          d = rnd.next(D_MIN, D_MAX);
       }
       of << n << ' ' << d << std::endl;
-      of << rnd.next(format("[0-9]{%d}", n)) << std::endl;
+      of << rnd.next(format("[023456789]{%d}", n)) << std::endl;
       of.close();
    }
 
-   // 0 と 1 のみ
+   // 0 と 9 のみ
    for (int ts{1}; ts <= 3; ts++) {
-      std::ofstream of(format("02_only01_%02d.in", ts).c_str());
+      std::ofstream of(format("02_only09_%02d.in", ts).c_str());
       int n{1}, d{};
       while (n > d) {
          n = rnd.next(N_MIN, N_MAX);
          d = rnd.next(D_MIN, D_MAX);
       }
       of << n << ' ' << d << std::endl;
-      of << rnd.next(format("[0-1]{%d}", n)) << std::endl;
+      of << rnd.next(format("[09]{%d}", n)) << std::endl;
       of.close();
    }
 
-   // かならず 0 が 1 つ以上
-   for (int ts{1}; ts <= 5; ts++) {
+   // かならず 0 が 1 つのみ
+   for (int ts{1}; ts <= 2; ts++) {
       std::ofstream of(format("03_s0s_%02d.in", ts).c_str());
       int n{1}, d{};
       while (n > d) {
@@ -63,7 +63,54 @@ int main(int argc, char* argv[]) {
       int m2 = n - t - 1;
 
       of << n << ' ' << d << std::endl;
-      of << rnd.next(format("[0-9]{%d}0[0-9]{%d}", m1, m2)) << std::endl;
+      of << rnd.next(format("[23456789]{%d}0[23456789]{%d}", m1, m2)) << std::endl;
       of.close();
+   }
+
+   // N のでかつよケース
+   for (int ts{1}; ts <= 3; ts++) {
+      std::ofstream of(format("04_max_n_%02d.in", ts).c_str());
+      int n{N_MAX - (ts - 1)};
+      int d{rnd.next(n, D_MAX)};
+      of << n << ' ' << d << std::endl;
+      of << rnd.next(format("[09]{%d}", n)) << std::endl;
+   }
+
+   // N = 1, ..., 3 && d = D_MAX - eps のケース
+   for (int ts{1}; ts <= 10; ts++) {
+      std::ofstream of(format("05_max_d_%02d.in", ts).c_str());
+      int n{rnd.next(1, 3)};
+      int d{rnd.next(D_MAX - 3, D_MAX)};
+      of << n << ' ' << d << std::endl;
+      of << rnd.next(format("[09]{%d}", n)) << std::endl;
+   }
+
+   // 0 のみ
+   for (int ts{1}; ts <= 5; ts++) {
+      std::ofstream of(format("06_all_0_%02d.in", ts).c_str());
+      int n{rnd.next(N_MIN, N_MAX)};
+      if (ts == 1) {
+         n = 1;
+      }
+      else if (ts == 5) {
+         n = N_MAX - 1;
+      }
+      int d{rnd.next(D_MAX - 3, D_MAX)};
+      if (ts == 5) 
+         d = D_MAX;
+      of << n << ' ' << d << std::endl;
+      of << rnd.next(format("[0]{%d}", n)) << std::endl;
+   }
+   
+   // 9 のみ
+   for (int ts{1}; ts <= 2; ts++) {
+      std::ofstream of(format("07_all_9_%02d.in", ts).c_str());
+      int n{rnd.next(N_MIN, N_MAX)};
+      if (ts == 1) {
+         n = 1;
+      }
+      int d{rnd.next(D_MAX - 3, D_MAX)};
+      of << n << ' ' << d << std::endl;
+      of << rnd.next(format("[9]{%d}", n)) << std::endl;
    }
 }
