@@ -1,7 +1,9 @@
 const int MIN_N = 1;
-const int MAX_N = 60;
+const int MAX_N_SUBTASK = 10;
+const int MAX_N = 365;
 const int MIN_XYZ = 1;
-const int MAX_XYZ = 100;
+const int MAX_XYZ_SUBTASK = 100;
+const int MAX_XYZ = 300;
 const int MIN_ABC = 0;
-const int MAX_ABC = 100;
-const int MAX_N_SUBTASK = 14;
+const int MAX_ABC_SUBTASK = 100;
+const int MAX_ABC = 300;
