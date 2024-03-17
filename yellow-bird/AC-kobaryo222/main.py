@@ -1,26 +1,24 @@
 #!/usr/bin/env python3
 
-INF = 1e9
+INF = 10**9
 N, M = map(int, input().split())
-
 last = -1
-vis, counted = [INF] * (N + 1), [False] * (N + 1)
+vis, counted = dict(), set()
 
 for i in range(M):
     t, x = map(int, input().split())
     if t == 1:
         vis[x] = i
     elif t == 2:
-        if not counted[x] and vis[x] < last:
-            counted[x] = True
+        if not x in counted and vis[x] < last:
+            counted.add(x)
         vis[x] = INF
     else:
         last = i
 
-for i in range(1, N + 1):
-    if not counted[i] and vis[i] < last:
-        counted[i] = True
+for x, vist in vis.items():
+    if not x in counted and vist < last:
+        counted.add(x)
 
-for i in range(1, N + 1):
-    if counted[i]:
-        print(i)
+for x in sorted(list(counted)):
+    print(x)
