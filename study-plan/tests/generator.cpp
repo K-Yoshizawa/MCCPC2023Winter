@@ -77,6 +77,13 @@ int main(int argc, char* argv[])
             vector<int> A(N, MAX_ABC), B(N, MAX_ABC), C(N, MAX_ABC);
             gen("21_max_01.in", N, X, Y, Z, A, B, C);
         }
+        {
+            // max
+            int N = MAX_N;
+            int X = MAX_XYZ, Y = MAX_XYZ, Z = MAX_XYZ;
+            vector<int> A(N, MAX_ABC - 1), B(N, MAX_ABC - 1), C(N, MAX_ABC - 1);
+            gen("22_max_minus_1_01.in", N, X, Y, Z, A, B, C);
+        }
     }
     return 0;
 }
