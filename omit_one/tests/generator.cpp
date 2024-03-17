@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
    }
 
    // 完全ランダム
-   for (int ts{1}; ts <= 10; ts++) {
+   for (int ts{1}; ts <= 6; ts++) {
       std::ofstream of(format("01_random_%02d.in", ts).c_str());
       int n{1}, d{};
       while (n > d) {
