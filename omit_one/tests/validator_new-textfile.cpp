@@ -13,10 +13,11 @@ int main(int argc, char* argv[]) {
     int N = inf.readInt(N_MIN, N_MAX, "N"); inf.readSpace();
     int D = inf.readInt(N, D_MAX, "D"); inf.readEoln();
     
-    std::string S = inf.readToken(format("[0-9]{%d}",N));
+    //S は 1 以外の数字からなる文字列
+    std::string S = inf.readToken(format("[02-9]{%d}",N));
     
-    // N == D の場合は1文字も追加しないので、0が先頭に来てはいけない
-    if(N == D) ensure(S.front() != '0');
+    // N == D の場合は1文字も追加しないので、0が先頭に来てはいけない(ただし、S = "0" は例外)
+    if(N == D && N > 1) ensure(S.front() != '0');
 
 	inf.readEoln();
 	inf.readEof();
