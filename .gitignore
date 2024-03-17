@@ -8,3 +8,5 @@ Thumbs.db
 *.out
 target
 .vscode/
+makezip.py
+converted_testcases.zip
