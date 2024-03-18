@@ -26,6 +26,7 @@ int main(int argc, char** argv) {
     {
         std::vector<std::array<int,2>> sample_inputs;
         sample_inputs.push_back({6, 100});
+        sample_inputs.push_back({6, 4});
         sample_inputs.push_back({1, 1000000000});
         output(sample_inputs, "00_sample_01.in");
     }
