@@ -216,7 +216,7 @@ int main(int argc, char* argv[]){
         {
             ofstream of(format("34_hand_02.in").c_str());
             of << "1000000000 300000" << endl;
-            for(int j = 0; j < 300000; ++j) of << "1 " << 1000000000 - j << endl;
+            for(int j = 0; j < 299999; ++j) of << "1 " << 1000000000 - j << endl;
             of << "3 0" << endl;
             of.close();
         }
