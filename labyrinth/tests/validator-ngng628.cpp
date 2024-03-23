@@ -2,15 +2,16 @@
 # include "testlib.h"
 
 const int N_MIN = 1;
-const int N_MAX = 700;
+const int N_MAX = 1500;
 const int M_MIN = 1;
-const int M_MAX = 1e6;
+const int M_MAX = 2*N_MAX*N_MAX;
 
 int main(int argc, char* argv[]) {
    registerValidation(argc, argv);
    int N = inf.readInt(N_MIN, N_MAX, "N");
    inf.readSpace();
    int M = inf.readInt(M_MIN, M_MAX, "M");
+   inf.ensuref(1 <= M && M <= 2*N*N, "range");
    inf.readEoln();
    std::string S = inf.readToken(format("[LRUD]{%d}", M).c_str(), "S");
    for (int i = 0; i < M - 1; i++) {
