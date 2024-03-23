@@ -2,9 +2,9 @@
 # include <bits/stdc++.h>
 
 constexpr int N_MIN = 1;
-constexpr int N_MAX = 5 * int(1e5);
+constexpr int N_MAX = 1 * int(1e9);
 constexpr int M_MIN = 1;
-constexpr int M_MAX = 5 * int(1e5);
+constexpr int M_MAX = 3 * int(1e5);
 constexpr int T_MIN = 1;
 constexpr int T_MAX = 3;
 constexpr int X_MIN = 0;
@@ -16,7 +16,7 @@ int main(int argc, char* argv[]){
    inf.readSpace();
    int m = inf.readInt(M_MIN, M_MAX, "M");
    inf.readEoln();
-   std::set<int> st;
+   std::multiset<int> st;
    for (int i{}; i < m; i++) {
       int t = inf.readInt(T_MIN, T_MAX, "T");
       inf.readSpace();
